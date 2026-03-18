@@ -113,10 +113,6 @@
     .demo-filename { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); letter-spacing: 0.05em; }
     .video-area { position: relative; background: #000; }
     #miVideo { width: 100%; max-height: 420px; display: block; }
-    .demo-footer { padding: 0.85rem 1.25rem; border-top: 1px solid var(--border); background: var(--surface2); }
-    .upload-tag { display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; color: var(--muted); cursor: pointer; border: 1px dashed var(--border); padding: 0.4rem 1rem; border-radius: 6px; transition: all 0.2s; }
-    .upload-tag:hover { color: var(--accent); border-color: rgba(56,189,248,0.4); }
-    .upload-tag input { display: none; }
 
     .proj-panel { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: border-color 0.3s, transform 0.3s; }
     .proj-panel:hover { border-color: rgba(56,189,248,0.35); transform: translateY(-4px); }
@@ -328,12 +324,6 @@
             <source src="mi video.mp4" type="video/mp4"/>
           </video>
         </div>
-        <div class="demo-footer">
-          <label class="upload-tag" for="fInput">
-            &#8679; Cambiar video
-            <input type="file" id="fInput" accept="video/*" onchange="loadV(event)"/>
-          </label>
-        </div>
       </div>
     </div>
   </div>
@@ -446,13 +436,6 @@
     });
 
     goTo(0);
-
-    function loadV(e) {
-      const f = e.target.files[0]; if(!f) return;
-      const v = document.getElementById('miVideo');
-      v.src = URL.createObjectURL(f);
-      v.play();
-    }
   </script>
 </body>
 </html>
