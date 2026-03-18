@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ronaldo — Dev Portfolio</title>
+  <title>Ronaldo Aliaga Vicente — Dev Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -29,18 +29,18 @@
     .nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 1rem 2.5rem;
+      padding: 0.75rem 1.2rem;
       background: rgba(8,13,22,0.85);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
     }
-    .nav-logo { font-family: var(--mono); font-size: 1.1rem; font-weight: 500; color: var(--accent); letter-spacing: 0.05em; }
+    .nav-logo { font-family: var(--mono); font-size: 0.95rem; font-weight: 500; color: var(--accent); letter-spacing: 0.05em; }
     .logo-blink { animation: blink 1s step-end infinite; }
     @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-    .nav-center { display: flex; gap: 2rem; }
+    .nav-center { display: flex; gap: 1rem; }
     .nav-center a {
-      font-family: var(--mono); font-size: 0.78rem; color: var(--muted);
-      text-decoration: none; letter-spacing: 0.08em; transition: color 0.2s;
+      font-family: var(--mono); font-size: 0.68rem; color: var(--muted);
+      text-decoration: none; letter-spacing: 0.06em; transition: color 0.2s;
       padding-bottom: 2px; border-bottom: 1px solid transparent;
     }
     .nav-center a:hover,
@@ -51,7 +51,7 @@
       overflow-y: auto;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
-      padding: 5rem 2rem 3rem;
+      padding: 4rem 1rem 2rem;
       opacity: 0; pointer-events: none;
       transform: translateY(30px);
       transition: opacity 0.5s ease, transform 0.5s ease;
@@ -59,108 +59,122 @@
     .page.active { opacity: 1; pointer-events: all; transform: translateY(0); }
     .page-inner { width: 100%; max-width: 900px; }
 
-    .btn-solid { background: var(--accent); color: var(--bg); padding: 0.7rem 1.6rem; border-radius: 8px; font-weight: 700; font-size: 0.88rem; border: none; cursor: pointer; transition: all 0.2s; box-shadow: 0 0 20px rgba(56,189,248,0.25); }
+    .btn-solid { background: var(--accent); color: var(--bg); padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 700; font-size: 0.82rem; border: none; cursor: pointer; transition: all 0.2s; box-shadow: 0 0 20px rgba(56,189,248,0.25); }
     .btn-solid:hover { box-shadow: 0 0 32px rgba(56,189,248,0.45); transform: translateY(-1px); }
-    .btn-outline { border: 1px solid var(--border); color: var(--text); padding: 0.7rem 1.6rem; border-radius: 8px; font-weight: 500; font-size: 0.88rem; background: none; cursor: pointer; transition: all 0.2s; }
+    .btn-outline { border: 1px solid var(--border); color: var(--text); padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 500; font-size: 0.82rem; background: none; cursor: pointer; transition: all 0.2s; }
     .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
 
-    .avatar-wrap { position: relative; width: 180px; height: 180px; display: flex; align-items: center; justify-content: center; }
-    .avatar-hex { width: 120px; height: 120px; background: linear-gradient(135deg, var(--accent), var(--accent2)); border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 1; box-shadow: 0 0 40px rgba(56,189,248,0.3); }
-    .avatar-inner { font-family: var(--mono); font-size: 2rem; font-weight: 700; color: var(--bg); }
+    .avatar-wrap { position: relative; width: 140px; height: 140px; display: flex; align-items: center; justify-content: center; }
+    .avatar-hex { width: 90px; height: 90px; background: linear-gradient(135deg, var(--accent), var(--accent2)); border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 1; box-shadow: 0 0 30px rgba(56,189,248,0.3); }
+    .avatar-inner { font-family: var(--mono); font-size: 1.5rem; font-weight: 700; color: var(--bg); }
     .avatar-ring { position: absolute; border-radius: 50%; border: 1px solid; animation: spin linear infinite; }
-    .r1 { width: 150px; height: 150px; border-color: rgba(56,189,248,0.25); animation-duration: 8s; }
-    .r2 { width: 180px; height: 180px; border-color: rgba(129,140,248,0.15); animation-duration: 14s; animation-direction: reverse; }
+    .r1 { width: 115px; height: 115px; border-color: rgba(56,189,248,0.25); animation-duration: 8s; }
+    .r2 { width: 140px; height: 140px; border-color: rgba(129,140,248,0.15); animation-duration: 14s; animation-direction: reverse; }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    .section-label { font-family: var(--mono); font-size: 0.72rem; color: var(--accent2); letter-spacing: 0.15em; margin-bottom: 2.5rem; }
+    .section-label { font-family: var(--mono); font-size: 0.65rem; color: var(--accent2); letter-spacing: 0.15em; margin-bottom: 1.5rem; }
 
-    .sobre-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 4rem; align-items: start; }
-    .sobre-text h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.03em; }
+    .sobre-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 2rem; align-items: start; }
+    .sobre-text h2 { font-size: clamp(1.6rem, 4vw, 2.5rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.03em; }
     .hl { color: var(--accent); }
     .hl2 { color: var(--accent2); }
-    .sobre-right p { font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 1.5rem; }
+    .sobre-right p { font-size: 0.85rem; color: #94a3b8; line-height: 1.7; margin-bottom: 1.2rem; }
     .sobre-right strong { color: var(--accent); font-weight: 600; }
-    .tech-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
-    .tech-item { display: flex; align-items: center; gap: 0.6rem; font-family: var(--mono); font-size: 0.8rem; color: #64748b; padding: 0.6rem 0.9rem; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; transition: all 0.2s; }
+    .tech-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; }
+    .tech-item { display: flex; align-items: center; gap: 0.5rem; font-family: var(--mono); font-size: 0.72rem; color: #64748b; padding: 0.5rem 0.75rem; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; transition: all 0.2s; }
     .tech-item:hover { color: var(--accent); border-color: rgba(56,189,248,0.3); }
-    .tech-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; flex-shrink: 0; }
+    .tech-dot { width: 5px; height: 5px; background: var(--accent); border-radius: 50%; flex-shrink: 0; }
 
-    .portada-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; }
-    .portada-top { background: linear-gradient(135deg, #0d1422, #111b2e); padding: 2.5rem 2rem 2rem; display: flex; align-items: center; gap: 2rem; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+    /* PORTADA */
+    .portada-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+    .portada-top { background: linear-gradient(135deg, #0d1422, #111b2e); padding: 1.5rem; display: flex; align-items: center; gap: 1.2rem; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
     .portada-top::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 50%, rgba(56,189,248,0.06), transparent 70%); }
-    .portada-avatar { width: 90px; height: 90px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent2)); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 2rem; font-weight: 700; color: var(--bg); flex-shrink: 0; box-shadow: 0 0 30px rgba(56,189,248,0.3); position: relative; z-index: 1; }
+    .portada-avatar { width: 70px; height: 70px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent2)); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 1.5rem; font-weight: 700; color: var(--bg); flex-shrink: 0; box-shadow: 0 0 20px rgba(56,189,248,0.3); position: relative; z-index: 1; }
     .portada-id { position: relative; z-index: 1; }
-    .portada-nombre { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.03em; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.3rem; }
-    .portada-rol { font-family: var(--mono); font-size: 0.75rem; color: var(--green); letter-spacing: 0.1em; margin-bottom: 0.6rem; }
-    .portada-uni { font-size: 0.85rem; color: var(--muted); display: flex; align-items: center; gap: 0.4rem; }
-    .portada-body { padding: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-    .info-block { background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem 1.4rem; }
-    .info-block-title { font-family: var(--mono); font-size: 0.62rem; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.8rem; }
-    .info-block p { font-size: 0.88rem; color: #94a3b8; line-height: 1.7; }
+    .portada-nombre { font-size: clamp(1rem, 4vw, 1.5rem); font-weight: 800; letter-spacing: -0.02em; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.25rem; }
+    .portada-rol { font-family: var(--mono); font-size: 0.65rem; color: var(--green); letter-spacing: 0.08em; margin-bottom: 0.4rem; }
+    .portada-uni { font-size: 0.75rem; color: var(--muted); display: flex; align-items: center; gap: 0.4rem; }
+    .portada-body { padding: 1rem; display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+    .info-block { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 0.9rem 1rem; }
+    .info-block-title { font-family: var(--mono); font-size: 0.58rem; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.6rem; }
+    .info-block p { font-size: 0.78rem; color: #94a3b8; line-height: 1.6; }
     .info-block p strong { color: var(--text); font-weight: 600; }
-    .info-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.6rem; }
-    .info-chip { font-family: var(--mono); font-size: 0.62rem; padding: 0.25rem 0.7rem; border-radius: 6px; background: rgba(56,189,248,0.07); border: 1px solid rgba(56,189,248,0.18); color: var(--accent); }
+    .info-chips { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.5rem; }
+    .info-chip { font-family: var(--mono); font-size: 0.58rem; padding: 0.2rem 0.55rem; border-radius: 5px; background: rgba(56,189,248,0.07); border: 1px solid rgba(56,189,248,0.18); color: var(--accent); }
     .info-chip.green { background: rgba(52,211,153,0.07); border-color: rgba(52,211,153,0.2); color: var(--green); }
     .info-chip.purple { background: rgba(129,140,248,0.07); border-color: rgba(129,140,248,0.2); color: var(--accent2); }
 
-    .demo-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
-    .demo-header { display: flex; align-items: center; gap: 0.75rem; padding: 0.85rem 1.25rem; border-bottom: 1px solid var(--border); background: var(--surface2); }
-    .demo-dots { display: flex; gap: 6px; }
-    .dd { width: 12px; height: 12px; border-radius: 50%; }
+    /* VIDEO */
+    .demo-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+    .demo-header { display: flex; align-items: center; gap: 0.6rem; padding: 0.7rem 1rem; border-bottom: 1px solid var(--border); background: var(--surface2); }
+    .demo-dots { display: flex; gap: 5px; }
+    .dd { width: 10px; height: 10px; border-radius: 50%; }
     .dd.red { background: #ff5f57; }
     .dd.yellow { background: #ffbd2e; }
     .dd.green { background: #28c840; }
-    .demo-filename { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); letter-spacing: 0.05em; }
+    .demo-filename { font-family: var(--mono); font-size: 0.65rem; color: var(--muted); letter-spacing: 0.05em; }
     .video-area { position: relative; background: #000; }
-    #miVideo { width: 100%; max-height: 420px; display: block; }
+    #miVideo { width: 100%; max-height: 380px; display: block; }
 
-    .proj-panel { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: border-color 0.3s, transform 0.3s; }
-    .proj-panel:hover { border-color: rgba(56,189,248,0.35); transform: translateY(-4px); }
-    .pp-head { padding: 1.2rem 1.5rem; background: var(--surface2); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
-    .pp-title { font-size: 1rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem; }
-    .pp-status { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em; padding: 0.25rem 0.7rem; border-radius: 99px; background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.3); color: var(--green); }
-    .pp-body { padding: 1.5rem; }
-    .pp-desc { font-size: 0.88rem; color: #64748b; line-height: 1.75; margin-bottom: 1.2rem; }
-    .pp-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.4rem; }
-    .pp-tags span { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.08em; padding: 0.25rem 0.7rem; border-radius: 6px; background: rgba(56,189,248,0.07); border: 1px solid rgba(56,189,248,0.18); color: var(--accent); transition: all 0.2s; }
+    /* PROYECTO */
+    .proj-panel { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; transition: border-color 0.3s, transform 0.3s; }
+    .proj-panel:hover { border-color: rgba(56,189,248,0.35); transform: translateY(-3px); }
+    .pp-head { padding: 1rem 1.2rem; background: var(--surface2); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+    .pp-title { font-size: 0.9rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem; }
+    .pp-status { font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.1em; padding: 0.2rem 0.6rem; border-radius: 99px; background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.3); color: var(--green); }
+    .pp-body { padding: 1.2rem; }
+    .pp-desc { font-size: 0.82rem; color: #64748b; line-height: 1.7; margin-bottom: 1rem; }
+    .pp-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 1.2rem; }
+    .pp-tags span { font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.08em; padding: 0.2rem 0.6rem; border-radius: 5px; background: rgba(56,189,248,0.07); border: 1px solid rgba(56,189,248,0.18); color: var(--accent); transition: all 0.2s; }
     .pp-tags span:hover { background: rgba(56,189,248,0.15); }
     .pp-btns { display: flex; gap: 0.5rem; }
-    .ppb-main { flex: 1; background: linear-gradient(135deg, var(--accent), var(--accent2)); color: var(--bg); border: none; padding: 0.6rem 1rem; border-radius: 8px; font-family: var(--font); font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: all 0.2s; }
-    .ppb-main:hover { box-shadow: 0 4px 24px rgba(56,189,248,0.4); transform: translateY(-1px); }
-    .ppb-sec { background: transparent; color: var(--muted); border: 1px solid var(--border); padding: 0.6rem 1rem; border-radius: 8px; font-family: var(--mono); font-size: 0.72rem; cursor: pointer; transition: all 0.2s; }
+    .ppb-main { flex: 1; background: linear-gradient(135deg, var(--accent), var(--accent2)); color: var(--bg); border: none; padding: 0.55rem 0.9rem; border-radius: 7px; font-family: var(--font); font-size: 0.75rem; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+    .ppb-main:hover { box-shadow: 0 4px 20px rgba(56,189,248,0.4); transform: translateY(-1px); }
+    .ppb-sec { background: transparent; color: var(--muted); border: 1px solid var(--border); padding: 0.55rem 0.9rem; border-radius: 7px; font-family: var(--mono); font-size: 0.68rem; cursor: pointer; transition: all 0.2s; }
     .ppb-sec:hover { color: var(--text); border-color: #334155; }
 
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-    .contact-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 1.4rem 1.5rem; display: flex; align-items: center; gap: 1rem; text-decoration: none; transition: all 0.25s; }
-    .contact-card:hover { transform: translateY(-3px); border-color: rgba(56,189,248,0.4); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
-    .contact-icon { width: 46px; height: 46px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
+    /* CONTACTO */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+    .contact-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.1rem; display: flex; align-items: center; gap: 0.75rem; text-decoration: none; transition: all 0.25s; }
+    .contact-card:hover { transform: translateY(-2px); border-color: rgba(56,189,248,0.4); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
+    .contact-icon { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
     .ic-gh { background: rgba(255,255,255,0.06); }
     .ic-li { background: rgba(10,102,194,0.15); }
     .ic-tw { background: rgba(29,161,242,0.12); }
     .ic-em { background: rgba(56,189,248,0.1); }
     .ic-dc { background: rgba(88,101,242,0.15); }
     .ic-yt { background: rgba(255,0,0,0.1); }
-    .contact-info { display: flex; flex-direction: column; gap: 0.2rem; overflow: hidden; }
-    .contact-name { font-weight: 600; font-size: 0.9rem; color: var(--text); }
-    .contact-handle { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .contact-arrow { margin-left: auto; color: var(--muted); font-size: 0.9rem; flex-shrink: 0; transition: transform 0.2s; }
-    .contact-card:hover .contact-arrow { transform: translateX(4px); color: var(--accent); }
+    .contact-info { display: flex; flex-direction: column; gap: 0.15rem; overflow: hidden; }
+    .contact-name { font-weight: 600; font-size: 0.82rem; color: var(--text); }
+    .contact-handle { font-family: var(--mono); font-size: 0.65rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .contact-arrow { margin-left: auto; color: var(--muted); font-size: 0.85rem; flex-shrink: 0; transition: transform 0.2s; }
+    .contact-card:hover .contact-arrow { transform: translateX(3px); color: var(--accent); }
 
-    .page-dots { position: fixed; right: 1.5rem; top: 50%; transform: translateY(-50%); z-index: 200; display: flex; flex-direction: column; gap: 0.6rem; }
-    .pdot { width: 6px; height: 6px; border-radius: 50%; background: var(--border); cursor: pointer; transition: all 0.3s; }
-    .pdot.active { background: var(--accent); box-shadow: 0 0 8px var(--accent); height: 20px; border-radius: 3px; }
+    .page-dots { position: fixed; right: 0.8rem; top: 50%; transform: translateY(-50%); z-index: 200; display: flex; flex-direction: column; gap: 0.5rem; }
+    .pdot { width: 5px; height: 5px; border-radius: 50%; background: var(--border); cursor: pointer; transition: all 0.3s; }
+    .pdot.active { background: var(--accent); box-shadow: 0 0 6px var(--accent); height: 16px; border-radius: 3px; }
 
-    .page-footer { margin-top: 2rem; text-align: center; font-family: var(--mono); font-size: 0.72rem; color: var(--muted); }
+    .page-footer { margin-top: 1.5rem; text-align: center; font-family: var(--mono); font-size: 0.65rem; color: var(--muted); }
     .fc-hl { color: var(--accent); }
 
+    /* RESPONSIVE MÓVIL */
     @media (max-width: 680px) {
-      .sobre-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .sobre-grid { grid-template-columns: 1fr; gap: 1.5rem; }
       .contact-grid { grid-template-columns: 1fr; }
       .portada-body { grid-template-columns: 1fr; }
-      .portada-top { flex-direction: column; text-align: center; }
-      .nav-center { gap: 1rem; }
-      .nav-center a { font-size: 0.65rem; }
+      .portada-top { flex-direction: row; align-items: center; }
+      .nav-center { gap: 0.6rem; }
+      .nav-center a { font-size: 0.6rem; }
       .page-dots { display: none; }
+      .page { padding: 3.5rem 0.8rem 1.5rem; }
+      .portada-nombre { font-size: 1rem; }
+    }
+
+    @media (max-width: 400px) {
+      .nav-center a { font-size: 0.55rem; }
+      .nav-center { gap: 0.4rem; }
+      .portada-top { flex-direction: column; text-align: center; }
+      .contact-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -195,7 +209,7 @@
         <div class="portada-top">
           <div class="portada-avatar">R</div>
           <div class="portada-id">
-            <div class="portada-nombre">Ronaldo</div>
+            <div class="portada-nombre">Ronaldo Aliaga Vicente</div>
             <div class="portada-rol">&#9679; Ing. de Software con Inteligencia Artificial</div>
             <div class="portada-uni">🎓 SENATI — Ing. de Software con IA</div>
           </div>
@@ -203,11 +217,11 @@
         <div class="portada-body">
           <div class="info-block">
             <div class="info-block-title">👤 Sobre mí</div>
-            <p>Soy <strong>Ronaldo</strong>, adolescente apasionado por la tecnología. Estudio <strong>Ingeniería de Software con Inteligencia Artificial</strong> en <strong>SENATI</strong> y me especializo en crear videojuegos y aplicaciones inteligentes desde cero.</p>
+            <p>Soy <strong>Ronaldo Aliaga Vicente</strong>, estudiante apasionado por la tecnología. Estudio <strong>Ingeniería de Software con IA</strong> en <strong>SENATI</strong> y me especializo en crear videojuegos inteligentes desde cero.</p>
           </div>
           <div class="info-block">
             <div class="info-block-title">🤖 IA en videojuegos</div>
-            <p>Aplico conceptos de <strong>Inteligencia Artificial</strong> en mis juegos: enemigos con comportamiento inteligente, toma de decisiones automática, pathfinding y sistemas de dificultad adaptativa usando <strong>Java</strong> y <strong>Greenfoot</strong>.</p>
+            <p>Aplico <strong>Inteligencia Artificial</strong> en mis juegos: enemigos inteligentes, pathfinding y dificultad adaptativa con <strong>Java</strong> y <strong>Greenfoot</strong>.</p>
             <div class="info-chips">
               <span class="info-chip">IA</span>
               <span class="info-chip">Pathfinding</span>
@@ -216,27 +230,27 @@
           </div>
           <div class="info-block">
             <div class="info-block-title">🎓 Educación</div>
-            <p><strong>SENATI</strong><br/>Carrera: Ingeniería de Software con IA<br/>Materias: OOP, Algoritmos, Machine Learning básico, Estructuras de datos e IA aplicada.</p>
+            <p><strong>SENATI</strong><br/>Ing. de Software con IA<br/>OOP, Algoritmos, Machine Learning, Estructuras de datos.</p>
             <div class="info-chips">
               <span class="info-chip green">En curso</span>
-              <span class="info-chip purple">Machine Learning</span>
+              <span class="info-chip purple">ML</span>
               <span class="info-chip purple">Algoritmos</span>
             </div>
           </div>
           <div class="info-block">
             <div class="info-block-title">⚡ Habilidades</div>
-            <p>Programación en <strong>Java</strong>, desarrollo web con <strong>HTML y CSS</strong>, videojuegos 2D con IA, lógica de colisiones, comportamiento de enemigos inteligentes y diseño de niveles.</p>
+            <p><strong>Java</strong>, <strong>HTML</strong>, <strong>CSS</strong>, videojuegos 2D con IA, colisiones, enemigos inteligentes y diseño de niveles.</p>
             <div class="info-chips">
               <span class="info-chip">Java</span>
               <span class="info-chip">HTML</span>
               <span class="info-chip">CSS</span>
-              <span class="info-chip green">IA Básica</span>
-              <span class="info-chip purple">2D Games</span>
+              <span class="info-chip green">IA</span>
+              <span class="info-chip purple">2D</span>
             </div>
           </div>
         </div>
       </div>
-      <div style="display:flex;gap:0.8rem;margin-top:1.5rem">
+      <div style="display:flex;gap:0.8rem;margin-top:1.2rem">
         <button class="btn-solid" onclick="goTo(2)">Ver proyectos</button>
         <button class="btn-outline" onclick="goTo(4)">Contacto</button>
       </div>
@@ -252,7 +266,7 @@
           <h2>Ing. de<br/><span class="hl">Software</span> &amp;<br/><span class="hl2">IA</span></h2>
         </div>
         <div class="sobre-right">
-          <p>Soy <strong>Ronaldo</strong>, estudiante adolescente de <strong>Ingeniería de Software con Inteligencia Artificial</strong> en <strong>SENATI</strong>. Me apasiona crear videojuegos 2D usando Java y Greenfoot, aplicando principios de IA para construir enemigos inteligentes y experiencias jugables únicas.</p>
+          <p>Soy <strong>Ronaldo Aliaga Vicente</strong>, estudiante de <strong>Ingeniería de Software con Inteligencia Artificial</strong> en <strong>SENATI</strong>. Me apasiona crear videojuegos 2D usando Java y Greenfoot, aplicando principios de IA para construir enemigos inteligentes y experiencias jugables únicas.</p>
           <p>La combinación de <strong>Ingeniería de Software</strong> e <strong>Inteligencia Artificial</strong> me permite desarrollar juegos más inteligentes, donde los personajes aprenden, se adaptan y reaccionan al jugador de forma dinámica.</p>
           <div class="tech-list">
             <div class="tech-item"><span class="tech-dot"></span>Java</div>
@@ -285,8 +299,7 @@
             en un universo donde los enemigos tienen comportamiento inteligente: se mueven en patrones,
             esquivan disparos y aumentan su dificultad con el tiempo. Incluye sistema de disparos,
             detección de colisiones, IA de enemigos con pathfinding básico y contador de
-            puntuación en tiempo real. Proyecto desarrollado aplicando principios de
-            Ingeniería de Software con IA aprendidos en SENATI.
+            puntuación en tiempo real.
           </p>
           <div class="pp-tags">
             <span>Greenfoot</span>
@@ -382,7 +395,7 @@
           <span class="contact-arrow">→</span>
         </a>
       </div>
-      <div class="page-footer">Creado por <span class="fc-hl">Ronaldo</span> &mdash; 2026</div>
+      <div class="page-footer">Creado por <span class="fc-hl">Ronaldo Aliaga Vicente</span> &mdash; 2026</div>
     </div>
   </div>
 
@@ -391,7 +404,7 @@
     const ctx = c.getContext('2d');
     c.width = window.innerWidth;
     c.height = window.innerHeight;
-    const stars = Array.from({length:150}, () => ({
+    const stars = Array.from({length:120}, () => ({
       x: Math.random()*c.width, y: Math.random()*c.height,
       r: Math.random()*1.2, a: Math.random()*Math.PI*2
     }));
