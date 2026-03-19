@@ -3,631 +3,458 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Vicente Silvestre Jop</title>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Bebas+Neue&family=IBM+Plex+Mono:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+  <title>Ronaldo Aliaga Vicente — Dev Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:      #020407;
-      --panel:   #060c10;
-      --card:    #091118;
-      --line:    #0d2030;
-      --neon:    #00ff88;
-      --neon2:   #00cfff;
-      --orange:  #ff7b35;
-      --text:    #c8dce8;
-      --dim:     #304a5c;
-      --font:    'Space Grotesk', sans-serif;
-      --display: 'Bebas Neue', cursive;
-      --mono:    'IBM Plex Mono', monospace;
-      --radius:  6px;
+      --bg: #080d16;
+      --surface: #0d1422;
+      --surface2: #111b2e;
+      --border: #1c2d47;
+      --accent: #38bdf8;
+      --accent2: #818cf8;
+      --green: #34d399;
+      --text: #e2e8f0;
+      --muted: #475569;
+      --font: 'Plus Jakarta Sans', sans-serif;
+      --mono: 'Fira Code', monospace;
     }
 
-    html, body { height: 100%; overflow: hidden; }
-    body { background: var(--bg); color: var(--text); font-family: var(--font); cursor: none; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font); overflow-x: hidden; }
+    #stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
 
-    /* CURSOR */
-    #cursor {
-      position: fixed; width: 10px; height: 10px; border-radius: 50%;
-      background: var(--neon); pointer-events: none; z-index: 9999;
-      transform: translate(-50%,-50%); mix-blend-mode: exclusion;
+    /* NAV */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.6rem 1rem;
+      background: rgba(8,13,22,0.9);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
     }
-    #cursor-ring {
-      position: fixed; width: 36px; height: 36px; border-radius: 50%;
-      border: 1px solid rgba(0,255,136,0.4); pointer-events: none; z-index: 9998;
-      transform: translate(-50%,-50%);
-      transition: left 0.12s ease, top 0.12s ease;
-    }
-
-    /* SCANLINES */
-    body::after {
-      content: ''; position: fixed; inset: 0; z-index: 9990; pointer-events: none;
-      background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.04) 3px, rgba(0,0,0,0.04) 4px);
-    }
-
-    /* HORIZONTAL TRACK */
-    .scroll-track {
-      display: flex; width: 500vw; height: 100vh;
-      transition: transform 0.7s cubic-bezier(0.77,0,0.18,1);
-    }
-    .slide {
-      width: 100vw; height: 100vh; flex-shrink: 0;
-      display: flex; flex-direction: column; justify-content: center; align-items: center;
-      padding: 4.5rem 4vw 2rem; position: relative; overflow: hidden;
-    }
-    .slide::before {
-      content: attr(data-num); position: absolute;
-      font-family: var(--display); font-size: 30vw;
-      color: rgba(0,255,136,0.025); right: -2vw; bottom: -4vh;
-      line-height: 1; pointer-events: none; user-select: none;
-    }
-
-    /* TOP BAR */
-    .topbar {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 500;
-      height: 52px; display: flex; align-items: center; justify-content: space-between;
-      padding: 0 2.5rem; border-bottom: 1px solid var(--line);
-      background: rgba(2,4,7,0.95); backdrop-filter: blur(12px);
-    }
-    .topbar-id { display: flex; align-items: center; gap: 0.8rem; }
-    .tb-badge {
-      font-family: var(--display); font-size: 1.05rem; letter-spacing: 0.08em;
-      color: var(--bg); background: var(--neon); padding: 0.15rem 0.6rem; border-radius: 3px;
-    }
-    .tb-name { font-family: var(--mono); font-size: 0.72rem; color: var(--dim); letter-spacing: 0.1em; }
-    .blink { animation: blink 1s step-end infinite; }
+    .nav-logo { font-family: var(--mono); font-size: 0.85rem; font-weight: 500; color: var(--accent); letter-spacing: 0.05em; }
+    .logo-blink { animation: blink 1s step-end infinite; }
     @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-
-    .topbar-nav { display: flex; }
-    .tnav {
-      font-family: var(--mono); font-size: 0.65rem; color: var(--dim);
-      text-decoration: none; letter-spacing: 0.12em;
-      padding: 0 1.1rem; height: 52px;
-      display: flex; align-items: center; gap: 0.4rem;
-      border-left: 1px solid var(--line); transition: all 0.2s; cursor: none;
+    .nav-center { display: flex; gap: 0.7rem; }
+    .nav-center a {
+      font-family: var(--mono); font-size: 0.58rem; color: var(--muted);
+      text-decoration: none; letter-spacing: 0.05em; transition: color 0.2s;
+      padding-bottom: 2px; border-bottom: 1px solid transparent;
     }
-    .tnav:hover, .tnav.on { color: var(--neon); background: rgba(0,255,136,0.04); }
-    .tn-num { color: rgba(0,255,136,0.3); font-size: 0.55rem; }
-    .tnav.on .tn-num { color: var(--neon); }
-    .topbar-progress { width: 80px; height: 2px; background: var(--line); border-radius: 2px; overflow: hidden; }
-    .progress-fill { height: 100%; background: var(--neon); border-radius: 2px; transition: width 0.6s ease; }
+    .nav-center a:hover,
+    .nav-center a.active { color: var(--accent); border-bottom-color: var(--accent); }
 
-    /* SIDE DOTS */
-    .side-dots {
-      position: fixed; right: 1.8rem; top: 50%; transform: translateY(-50%);
-      z-index: 600; display: flex; flex-direction: column; gap: 0.6rem;
+    /* PAGES */
+    .page {
+      position: fixed; inset: 0; z-index: 1;
+      overflow-y: auto;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: flex-start;
+      padding: 3.5rem 0.8rem 1.5rem;
+      opacity: 0; pointer-events: none;
+      transform: translateY(30px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
     }
-    .sd {
-      width: 4px; height: 4px; border-radius: 50%; background: var(--line);
-      cursor: none; transition: all 0.3s; position: relative;
-    }
-    .sd::before {
-      content: attr(data-label); position: absolute; right: 1.2rem; top: 50%;
-      transform: translateY(-50%); font-family: var(--mono); font-size: 0.55rem;
-      letter-spacing: 0.12em; color: var(--neon); white-space: nowrap;
-      opacity: 0; transition: opacity 0.2s; pointer-events: none;
-    }
-    .sd:hover::before, .sd.on::before { opacity: 1; }
-    .sd.on { background: var(--neon); box-shadow: 0 0 10px var(--neon); height: 20px; border-radius: 2px; }
+    .page.active { opacity: 1; pointer-events: all; transform: translateY(0); }
+    .page-inner { width: 100%; max-width: 860px; }
 
-    /* SECTION LABEL */
-    .s-label {
-      font-family: var(--mono); font-size: 0.6rem; color: var(--neon);
-      letter-spacing: 0.25em; display: flex; align-items: center; gap: 0.7rem; margin-bottom: 1.5rem;
+    .btn-solid { background: var(--accent); color: var(--bg); padding: 0.5rem 1rem; border-radius: 7px; font-weight: 700; font-size: 0.75rem; border: none; cursor: pointer; transition: all 0.2s; box-shadow: 0 0 16px rgba(56,189,248,0.25); }
+    .btn-solid:hover { box-shadow: 0 0 24px rgba(56,189,248,0.45); transform: translateY(-1px); }
+    .btn-outline { border: 1px solid var(--border); color: var(--text); padding: 0.5rem 1rem; border-radius: 7px; font-weight: 500; font-size: 0.75rem; background: none; cursor: pointer; transition: all 0.2s; }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    .section-label { font-family: var(--mono); font-size: 0.58rem; color: var(--accent2); letter-spacing: 0.15em; margin-bottom: 1rem; }
+
+    /* PORTADA */
+    .portada-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+
+    .portada-top {
+      background: linear-gradient(135deg, #0d1422, #111b2e);
+      padding: 1rem;
+      display: flex; align-items: center; gap: 0.9rem;
+      border-bottom: 1px solid var(--border);
+      position: relative; overflow: hidden;
     }
-    .s-label::before { content: ''; width: 20px; height: 1px; background: var(--neon); }
+    .portada-top::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 50%, rgba(56,189,248,0.06), transparent 70%); }
 
-    /* ====== SLIDE 0 — HERO ====== */
-    .hero-layout { width: 100%; max-width: 1100px; }
-    .hero-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 3rem; }
-    .hero-label {
-      font-family: var(--mono); font-size: 0.62rem; color: var(--neon);
-      letter-spacing: 0.25em; display: flex; align-items: center; gap: 0.6rem;
+    .portada-avatar {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--mono); font-size: 1.2rem; font-weight: 700;
+      color: var(--bg); flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(56,189,248,0.3);
+      position: relative; z-index: 1;
     }
-    .hero-label::before { content: ''; width: 24px; height: 1px; background: var(--neon); }
-    .hero-status { font-family: var(--mono); font-size: 0.62rem; color: var(--dim); display: flex; align-items: center; gap: 0.6rem; }
-    .live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--neon); animation: livepulse 1.5s ease-in-out infinite; }
-    @keyframes livepulse { 0%,100%{box-shadow:0 0 0 0 rgba(0,255,136,0.6)} 50%{box-shadow:0 0 0 6px rgba(0,255,136,0)} }
-    .hero-name { font-family: var(--display); font-size: clamp(5rem,11vw,9rem); line-height: 0.92; letter-spacing: 0.02em; margin-bottom: 0.6rem; }
-    .hero-name .w1 { color: var(--text); display: block; }
-    .hero-name .w2 { color: transparent; -webkit-text-stroke: 1.5px var(--neon); display: block; }
-    .hero-name .w3 { color: var(--neon2); font-size: 0.55em; display: block; letter-spacing: 0.05em; }
-    .hero-bottom { display: flex; align-items: flex-end; justify-content: space-between; margin-top: 2.5rem; }
-    .hero-desc { max-width: 400px; font-size: 0.9rem; color: var(--dim); line-height: 1.75; border-left: 2px solid var(--line); padding-left: 1.2rem; }
-    .hero-desc strong { color: var(--neon); font-weight: 600; }
-    .hero-ctas { display: flex; gap: 0.7rem; }
-    .cta-prim {
-      font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em;
-      background: var(--neon); color: var(--bg); border: none;
-      padding: 0.75rem 1.6rem; border-radius: var(--radius); font-weight: 700; cursor: none; transition: all 0.2s;
+
+    .portada-id { position: relative; z-index: 1; }
+    .portada-nombre {
+      font-size: clamp(0.85rem, 3.5vw, 1.2rem);
+      font-weight: 800; letter-spacing: -0.02em;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.2rem;
     }
-    .cta-prim:hover { box-shadow: 0 0 30px rgba(0,255,136,0.4); transform: translateY(-2px); }
-    .cta-sec {
-      font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em;
-      background: transparent; color: var(--dim); border: 1px solid var(--line);
-      padding: 0.75rem 1.6rem; border-radius: var(--radius); cursor: none; transition: all 0.2s;
-    }
-    .cta-sec:hover { color: var(--text); border-color: var(--dim); }
+    .portada-rol { font-family: var(--mono); font-size: 0.58rem; color: var(--green); letter-spacing: 0.06em; margin-bottom: 0.25rem; }
+    .portada-uni { font-size: 0.65rem; color: var(--muted); display: flex; align-items: center; gap: 0.3rem; }
 
-    /* ====== SLIDE 1 — SOBRE ====== */
-    .sobre-layout { width: 100%; max-width: 1100px; display: grid; grid-template-columns: 1fr 1.4fr; gap: 5rem; align-items: center; }
-    .slide-title { font-family: var(--display); font-size: clamp(3.5rem,6vw,5.5rem); line-height: 0.95; letter-spacing: 0.02em; margin-bottom: 2rem; }
-    .slide-title .accent { color: var(--neon); }
-    .slide-title .accent2 { color: var(--neon2); }
-    .skills-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 0.45rem; }
-    .skill-tag {
-      font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.08em;
-      padding: 0.6rem 0.9rem; border-radius: var(--radius);
-      background: var(--card); border: 1px solid var(--line); color: var(--dim);
-      display: flex; align-items: center; gap: 0.5rem; transition: all 0.2s;
-    }
-    .skill-tag:hover { color: var(--neon); border-color: rgba(0,255,136,0.25); }
-    .skill-tag .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--neon); flex-shrink: 0; }
-    .bio-text { font-size: 0.9rem; color: var(--dim); line-height: 1.85; margin-bottom: 1.2rem; }
-    .bio-text strong { color: var(--text); font-weight: 600; }
-    .stats-row { display: flex; gap: 1.5rem; margin-top: 2rem; }
-    .stat-box { text-align: center; }
-    .stat-num { font-family: var(--display); font-size: 2.8rem; color: var(--neon); line-height: 1; }
-    .stat-lbl { font-family: var(--mono); font-size: 0.58rem; color: var(--dim); letter-spacing: 0.15em; margin-top: 0.3rem; }
-    .divider-v { width: 1px; background: var(--line); }
+    .portada-body { padding: 0.8rem; display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
 
-    /* ====== SLIDE 2 — PROYECTOS ====== */
-    .proj-layout { width: 100%; max-width: 1100px; }
-    .proj-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 2rem; }
-    .proj-card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; display: grid; grid-template-columns: 1fr 1fr; }
-    .pc-left { padding: 2.5rem; border-right: 1px solid var(--line); }
-    .pc-eyebrow { font-family: var(--mono); font-size: 0.6rem; color: var(--neon); letter-spacing: 0.2em; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.6rem; }
-    .pc-eyebrow::before { content: '//'; color: var(--dim); }
-    .pc-title { font-family: var(--display); font-size: 2.8rem; line-height: 1; letter-spacing: 0.02em; margin-bottom: 1rem; color: var(--text); }
-    .pc-title span { color: var(--neon); }
-    .pc-desc { font-size: 0.85rem; color: var(--dim); line-height: 1.8; margin-bottom: 1.5rem; }
-    .pc-desc strong { color: var(--text); }
-    .pc-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 1.8rem; }
-    .pc-tags span {
-      font-family: var(--mono); font-size: 0.58rem; padding: 0.22rem 0.65rem;
-      border-radius: 3px; background: rgba(0,255,136,0.06);
-      border: 1px solid rgba(0,255,136,0.15); color: rgba(0,255,136,0.7); letter-spacing: 0.06em;
-    }
-    .pc-btns { display: flex; gap: 0.6rem; }
-    .pcb-main {
-      font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em;
-      background: var(--neon); color: var(--bg); border: none;
-      padding: 0.7rem 1.4rem; border-radius: var(--radius); font-weight: 700; cursor: none; transition: all 0.2s;
-    }
-    .pcb-main:hover { box-shadow: 0 0 24px rgba(0,255,136,0.35); transform: translateY(-1px); }
-    .pcb-sec {
-      font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em;
-      background: transparent; color: var(--dim); border: 1px solid var(--line);
-      padding: 0.7rem 1.4rem; border-radius: var(--radius); cursor: none; transition: all 0.2s;
-    }
-    .pcb-sec:hover { color: var(--text); border-color: var(--dim); }
-    .pc-right { padding: 2.5rem; display: flex; flex-direction: column; gap: 0.7rem; }
-    .pc-info-row { display: flex; justify-content: space-between; align-items: center; padding: 0.7rem 0.9rem; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); }
-    .pir-k { font-family: var(--mono); font-size: 0.6rem; color: var(--dim); letter-spacing: 0.12em; }
-    .pir-v { font-family: var(--mono); font-size: 0.7rem; color: var(--text); font-weight: 700; }
-    .pir-v.g { color: var(--neon); } .pir-v.b { color: var(--neon2); } .pir-v.o { color: var(--orange); }
+    .info-block { background: var(--surface2); border: 1px solid var(--border); border-radius: 9px; padding: 0.7rem 0.8rem; }
+    .info-block-title { font-family: var(--mono); font-size: 0.54rem; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .info-block p { font-size: 0.7rem; color: #94a3b8; line-height: 1.55; }
+    .info-block p strong { color: var(--text); font-weight: 600; }
+    .info-chips { display: flex; flex-wrap: wrap; gap: 0.25rem; margin-top: 0.4rem; }
+    .info-chip { font-family: var(--mono); font-size: 0.52rem; padding: 0.15rem 0.5rem; border-radius: 4px; background: rgba(56,189,248,0.07); border: 1px solid rgba(56,189,248,0.18); color: var(--accent); }
+    .info-chip.green { background: rgba(52,211,153,0.07); border-color: rgba(52,211,153,0.2); color: var(--green); }
+    .info-chip.purple { background: rgba(129,140,248,0.07); border-color: rgba(129,140,248,0.2); color: var(--accent2); }
 
-    /* ====== SLIDE 3 — MEDIA ====== */
-    .media-layout { width: 100%; max-width: 1100px; }
-    .media-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 1.5rem; }
-    .media-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 1.2rem; }
+    /* SOBRE */
+    .sobre-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 1.5rem; align-items: start; }
+    .sobre-text h2 { font-size: clamp(1.4rem, 4vw, 2.5rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.03em; }
+    .hl { color: var(--accent); }
+    .hl2 { color: var(--accent2); }
+    .sobre-right p { font-size: 0.78rem; color: #94a3b8; line-height: 1.7; margin-bottom: 1rem; }
+    .sobre-right strong { color: var(--accent); font-weight: 600; }
+    .tech-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0.35rem; }
+    .tech-item { display: flex; align-items: center; gap: 0.45rem; font-family: var(--mono); font-size: 0.65rem; color: #64748b; padding: 0.45rem 0.65rem; background: var(--surface); border: 1px solid var(--border); border-radius: 7px; transition: all 0.2s; }
+    .tech-item:hover { color: var(--accent); border-color: rgba(56,189,248,0.3); }
+    .tech-dot { width: 5px; height: 5px; background: var(--accent); border-radius: 50%; flex-shrink: 0; }
 
-    /* VIDEO BOX */
-    .video-box { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
-    .vbox-bar { display: flex; align-items: center; gap: 0.8rem; padding: 0.75rem 1.2rem; border-bottom: 1px solid var(--line); background: var(--card); }
-    .vb-dots { display: flex; gap: 5px; }
-    .vbd { width: 10px; height: 10px; border-radius: 50%; }
-    .vbd.r { background: #ff5f57; } .vbd.y { background: #ffbd2e; } .vbd.g { background: #28c840; }
-    .vbox-label { font-family: var(--mono); font-size: 0.65rem; color: var(--dim); letter-spacing: 0.08em; }
-    .vbox-label span { color: var(--neon2); }
-    #miVideo { width: 100%; display: block; background: #000; max-height: 280px; object-fit: contain; }
-    .vbox-footer { padding: 0.75rem 1.2rem; border-top: 1px solid var(--line); background: var(--card); display: flex; align-items: center; gap: 0.8rem; }
+    /* VIDEO */
+    .demo-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+    .demo-header { display: flex; align-items: center; gap: 0.5rem; padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--border); background: var(--surface2); }
+    .demo-dots { display: flex; gap: 4px; }
+    .dd { width: 9px; height: 9px; border-radius: 50%; }
+    .dd.red { background: #ff5f57; }
+    .dd.yellow { background: #ffbd2e; }
+    .dd.green { background: #28c840; }
+    .demo-filename { font-family: var(--mono); font-size: 0.6rem; color: var(--muted); }
+    .video-area { background: #000; }
+    #miVideo { width: 100%; max-height: 340px; display: block; }
 
-    /* IMAGES BOX */
-    .images-box { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; }
-    .ibox-bar { display: flex; align-items: center; gap: 0.8rem; padding: 0.75rem 1.2rem; border-bottom: 1px solid var(--line); background: var(--card); flex-shrink: 0; }
-    .ibox-label { font-family: var(--mono); font-size: 0.65rem; color: var(--dim); letter-spacing: 0.08em; }
-    .ibox-label span { color: var(--neon); }
-    .gallery-area { flex: 1; padding: 0.8rem; display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; overflow-y: auto; min-height: 180px; max-height: 260px; }
-    .gallery-thumb { aspect-ratio: 1; border-radius: 6px; overflow: hidden; border: 1px solid var(--line); cursor: none; position: relative; transition: transform 0.2s; }
-    .gallery-thumb:hover { transform: scale(1.04); border-color: var(--neon); }
-    .gallery-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .ibox-footer { padding: 0.75rem 1.2rem; border-top: 1px solid var(--line); background: var(--card); display: flex; align-items: center; gap: 0.8rem; flex-shrink: 0; }
+    /* PROYECTO */
+    .proj-panel { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: border-color 0.3s, transform 0.3s; }
+    .proj-panel:hover { border-color: rgba(56,189,248,0.35); transform: translateY(-3px); }
+    .pp-head { padding: 0.85rem 1rem; background: var(--surface2); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+    .pp-title { font-size: 0.82rem; font-weight: 700; display: flex; align-items: center; gap: 0.4rem; }
+    .pp-status { font-family: var(--mono); font-size: 0.54rem; letter-spacing: 0.08em; padding: 0.18rem 0.55rem; border-radius: 99px; background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.3); color: var(--green); }
+    .pp-body { padding: 1rem; }
+    .pp-desc { font-size: 0.75rem; color: #64748b; line-height: 1.65; margin-bottom: 0.9rem; }
+    .pp-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-bottom: 1rem; }
+    .pp-tags span { font-family: var(--mono); font-size: 0.54rem; letter-spacing: 0.06em; padding: 0.18rem 0.55rem; border-radius: 5px; background: rgba(56,189,248,0.07); border: 1px solid rgba(56,189,248,0.18); color: var(--accent); }
+    .pp-btns { display: flex; gap: 0.45rem; }
+    .ppb-main { flex: 1; background: linear-gradient(135deg, var(--accent), var(--accent2)); color: var(--bg); border: none; padding: 0.5rem 0.8rem; border-radius: 7px; font-size: 0.72rem; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+    .ppb-main:hover { box-shadow: 0 4px 18px rgba(56,189,248,0.4); transform: translateY(-1px); }
+    .ppb-sec { background: transparent; color: var(--muted); border: 1px solid var(--border); padding: 0.5rem 0.8rem; border-radius: 7px; font-family: var(--mono); font-size: 0.62rem; cursor: pointer; transition: all 0.2s; }
+    .ppb-sec:hover { color: var(--text); border-color: #334155; }
 
-    /* UPLOAD BUTTON */
-    .upload-btn {
-      display: inline-flex; align-items: center; gap: 0.45rem;
-      font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.1em;
-      color: var(--dim); border: 1px dashed var(--dim);
-      padding: 0.4rem 1rem; border-radius: var(--radius);
-      cursor: pointer; transition: all 0.2s; background: none;
-    }
-    .upload-btn:hover { color: var(--neon); border-color: var(--neon); }
-    .upload-btn input { display: none; }
+    /* CONTACTO */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+    .contact-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 0.8rem 0.9rem; display: flex; align-items: center; gap: 0.6rem; text-decoration: none; transition: all 0.25s; }
+    .contact-card:hover { transform: translateY(-2px); border-color: rgba(56,189,248,0.4); box-shadow: 0 5px 16px rgba(0,0,0,0.3); }
+    .contact-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.95rem; flex-shrink: 0; }
+    .ic-gh { background: rgba(255,255,255,0.06); }
+    .ic-li { background: rgba(10,102,194,0.15); }
+    .ic-tw { background: rgba(29,161,242,0.12); }
+    .ic-em { background: rgba(56,189,248,0.1); }
+    .ic-dc { background: rgba(88,101,242,0.15); }
+    .ic-yt { background: rgba(255,0,0,0.1); }
+    .contact-info { display: flex; flex-direction: column; gap: 0.1rem; overflow: hidden; }
+    .contact-name { font-weight: 600; font-size: 0.75rem; color: var(--text); }
+    .contact-handle { font-family: var(--mono); font-size: 0.58rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .contact-arrow { margin-left: auto; color: var(--muted); font-size: 0.8rem; flex-shrink: 0; transition: transform 0.2s; }
+    .contact-card:hover .contact-arrow { transform: translateX(3px); color: var(--accent); }
 
-    /* LIGHTBOX */
-    .lightbox { position: fixed; inset: 0; z-index: 800; background: rgba(2,4,7,0.96); display: none; align-items: center; justify-content: center; }
-    .lightbox.open { display: flex; }
-    .lb-img { max-width: 88vw; max-height: 88vh; border-radius: 8px; border: 1px solid var(--line); }
-    .lb-close { position: absolute; top: 1.5rem; right: 1.5rem; background: var(--card); border: 1px solid var(--line); color: var(--dim); font-family: var(--mono); font-size: 0.7rem; padding: 0.4rem 0.9rem; border-radius: var(--radius); cursor: pointer; transition: all 0.2s; }
-    .lb-close:hover { color: var(--text); }
+    .page-dots { position: fixed; right: 0.6rem; top: 50%; transform: translateY(-50%); z-index: 200; display: flex; flex-direction: column; gap: 0.45rem; }
+    .pdot { width: 5px; height: 5px; border-radius: 50%; background: var(--border); cursor: pointer; transition: all 0.3s; }
+    .pdot.active { background: var(--accent); box-shadow: 0 0 6px var(--accent); height: 14px; border-radius: 3px; }
 
-    /* ====== SLIDE 4 — CONTACTO ====== */
-    .contact-layout { width: 100%; max-width: 1100px; }
-    .contact-big { font-family: var(--display); font-size: clamp(4rem,8vw,7rem); line-height: 0.92; letter-spacing: 0.02em; margin-bottom: 3rem; }
-    .contact-big .line2 { color: var(--neon); }
-    .contact-big .line3 { color: transparent; -webkit-text-stroke: 1.5px var(--dim); font-size: 0.7em; }
-    .contact-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.8rem; margin-bottom: 1.5rem; }
-    .cc { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 1.2rem 1.4rem; display: flex; align-items: center; gap: 0.9rem; text-decoration: none; transition: all 0.25s; cursor: none; position: relative; overflow: hidden; }
-    .cc::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--neon); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
-    .cc:hover::after { transform: scaleX(1); }
-    .cc:hover { border-color: rgba(0,255,136,0.2); transform: translateY(-3px); }
-    .cc-icon { font-size: 1.4rem; flex-shrink: 0; }
-    .cc-info { min-width: 0; }
-    .cc-name { font-weight: 700; font-size: 0.85rem; color: var(--text); margin-bottom: 0.15rem; }
-    .cc-handle { font-family: var(--mono); font-size: 0.65rem; color: var(--dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .cc-arrow { margin-left: auto; color: var(--dim); font-size: 0.8rem; transition: all 0.2s; flex-shrink: 0; }
-    .cc:hover .cc-arrow { transform: translate(3px,-3px); color: var(--neon); }
-    .contact-footer { font-family: var(--mono); font-size: 0.62rem; color: var(--dim); letter-spacing: 0.12em; text-align: center; margin-top: 1.5rem; }
-    .contact-footer span { color: var(--neon); }
+    .page-footer { margin-top: 1.2rem; text-align: center; font-family: var(--mono); font-size: 0.58rem; color: var(--muted); }
+    .fc-hl { color: var(--accent); }
 
-    @media (max-width: 760px) {
-      .sobre-layout { grid-template-columns: 1fr; gap: 2.5rem; }
-      .proj-card { grid-template-columns: 1fr; }
-      .pc-right { border-top: 1px solid var(--line); border-right: none; }
-      .media-grid { grid-template-columns: 1fr; }
-      .contact-cards { grid-template-columns: 1fr 1fr; }
-      .side-dots { display: none; }
-      .hero-name { font-size: 16vw; }
-      .hero-bottom { flex-direction: column; gap: 1.5rem; align-items: flex-start; }
+    @media (max-width: 480px) {
+      .sobre-grid { grid-template-columns: 1fr; gap: 1rem; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .portada-body { grid-template-columns: 1fr; }
+      .page-dots { display: none; }
+      .nav-center { gap: 0.5rem; }
     }
   </style>
 </head>
 <body>
 
-  <div id="cursor"></div>
-  <div id="cursor-ring"></div>
+  <canvas id="stars"></canvas>
 
-  <!-- LIGHTBOX -->
-  <div class="lightbox" id="lightbox">
-    <img class="lb-img" id="lb-img" src="" alt=""/>
-    <button class="lb-close" onclick="closeLightbox()">✕ CERRAR</button>
-  </div>
-
-  <!-- TOP BAR -->
-  <nav class="topbar">
-    <div class="topbar-id">
-      <div class="tb-badge">VSJ</div>
-      <span class="tb-name">vicente_silvestre_jop<span class="blink" style="color:var(--neon)">_</span></span>
-    </div>
-    <div class="topbar-nav">
-      <a class="tnav on" id="tnav0" onclick="goTo(0);return false;" href="#"><span class="tn-num">00</span>INICIO</a>
-      <a class="tnav"    id="tnav1" onclick="goTo(1);return false;" href="#"><span class="tn-num">01</span>SOBRE</a>
-      <a class="tnav"    id="tnav2" onclick="goTo(2);return false;" href="#"><span class="tn-num">02</span>PROYECTOS</a>
-      <a class="tnav"    id="tnav3" onclick="goTo(3);return false;" href="#"><span class="tn-num">03</span>MEDIA</a>
-      <a class="tnav"    id="tnav4" onclick="goTo(4);return false;" href="#"><span class="tn-num">04</span>CONTACTO</a>
-    </div>
-    <div class="topbar-progress">
-      <div class="progress-fill" id="progFill" style="width:0%"></div>
+  <nav class="nav">
+    <div class="nav-logo">RN<span class="logo-blink">_</span></div>
+    <div class="nav-center">
+      <a href="#" onclick="goTo(0);return false;" id="nav0">Inicio</a>
+      <a href="#" onclick="goTo(1);return false;" id="nav1">Sobre</a>
+      <a href="#" onclick="goTo(2);return false;" id="nav2">Proyectos</a>
+      <a href="#" onclick="goTo(3);return false;" id="nav3">Video</a>
+      <a href="#" onclick="goTo(4);return false;" id="nav4">Contacto</a>
     </div>
   </nav>
 
-  <!-- SIDE DOTS -->
-  <div class="side-dots">
-    <div class="sd on" data-label="INICIO"    onclick="goTo(0)"></div>
-    <div class="sd"    data-label="SOBRE"     onclick="goTo(1)"></div>
-    <div class="sd"    data-label="PROYECTOS" onclick="goTo(2)"></div>
-    <div class="sd"    data-label="MEDIA"     onclick="goTo(3)"></div>
-    <div class="sd"    data-label="CONTACTO"  onclick="goTo(4)"></div>
+  <div class="page-dots">
+    <div class="pdot active" onclick="goTo(0)"></div>
+    <div class="pdot" onclick="goTo(1)"></div>
+    <div class="pdot" onclick="goTo(2)"></div>
+    <div class="pdot" onclick="goTo(3)"></div>
+    <div class="pdot" onclick="goTo(4)"></div>
   </div>
 
-  <div class="scroll-track" id="track">
-
-    <!-- SLIDE 0 — HERO -->
-    <div class="slide" data-num="00" id="slide0">
-      <div class="hero-layout">
-        <div class="hero-top">
-          <div class="hero-label">PORTFOLIO · 2026</div>
-          <div class="hero-status"><span class="live-dot"></span>SENATI — ING. SOFTWARE + IA</div>
+  <!-- PAGE 0 — PORTADA -->
+  <div class="page active" id="page0">
+    <div class="page-inner">
+      <div class="section-label">// PORTADA</div>
+      <div class="portada-wrap">
+        <div class="portada-top">
+          <div class="portada-avatar">R</div>
+          <div class="portada-id">
+            <div class="portada-nombre">Ronaldo Aliaga Vicente</div>
+            <div class="portada-rol">&#9679; Ing. de Software con Inteligencia Artificial</div>
+            <div class="portada-uni">🎓 SENATI — Ing. de Software con IA</div>
+          </div>
         </div>
-        <div class="hero-name">
-          <span class="w1">VICENTE</span>
-          <span class="w2">SILVESTRE</span>
-          <span class="w3">JOP</span>
-        </div>
-        <div class="hero-bottom">
-          <p class="hero-desc">
-            Desarrollador de videojuegos 2D con <strong>Inteligencia Artificial</strong>.<br/>
-            Especialista en <strong>Java + Greenfoot</strong>, enemigos inteligentes,<br/>
-            pathfinding y sistemas de dificultad adaptativa.
-          </p>
-          <div class="hero-ctas">
-            <button class="cta-prim" onclick="goTo(2)">VER PROYECTO →</button>
-            <button class="cta-sec"  onclick="goTo(4)">CONTACTO</button>
+        <div class="portada-body">
+          <div class="info-block">
+            <div class="info-block-title">👤 Sobre mí</div>
+            <p>Soy <strong>Ronaldo Aliaga Vicente</strong>, estudiante apasionado por la tecnología. Estudio <strong>Ing. de Software con IA</strong> en <strong>SENATI</strong> y creo videojuegos inteligentes.</p>
+          </div>
+          <div class="info-block">
+            <div class="info-block-title">🤖 IA en videojuegos</div>
+            <p>Aplico <strong>IA</strong> en mis juegos: enemigos inteligentes, pathfinding y dificultad adaptativa con <strong>Java</strong> y <strong>Greenfoot</strong>.</p>
+            <div class="info-chips">
+              <span class="info-chip">IA</span>
+              <span class="info-chip">Pathfinding</span>
+              <span class="info-chip">Greenfoot</span>
+            </div>
+          </div>
+          <div class="info-block">
+            <div class="info-block-title">🎓 Educación</div>
+            <p><strong>SENATI</strong><br/>Ing. de Software con IA<br/>OOP, Algoritmos, Machine Learning.</p>
+            <div class="info-chips">
+              <span class="info-chip green">En curso</span>
+              <span class="info-chip purple">ML</span>
+              <span class="info-chip purple">Algoritmos</span>
+            </div>
+          </div>
+          <div class="info-block">
+            <div class="info-block-title">⚡ Habilidades</div>
+            <p><strong>Java</strong>, <strong>HTML</strong>, <strong>CSS</strong>, videojuegos 2D con IA y diseño de niveles.</p>
+            <div class="info-chips">
+              <span class="info-chip">Java</span>
+              <span class="info-chip">HTML</span>
+              <span class="info-chip">CSS</span>
+              <span class="info-chip green">IA</span>
+              <span class="info-chip purple">2D</span>
+            </div>
           </div>
         </div>
       </div>
+      <div style="display:flex;gap:0.6rem;margin-top:0.9rem">
+        <button class="btn-solid" onclick="goTo(2)">Ver proyectos</button>
+        <button class="btn-outline" onclick="goTo(4)">Contacto</button>
+      </div>
     </div>
+  </div>
 
-    <!-- SLIDE 1 — SOBRE -->
-    <div class="slide" data-num="01" id="slide1">
-      <div class="sobre-layout">
-        <div class="sobre-left">
-          <div class="s-label">SOBRE MÍ</div>
-          <div class="slide-title">ING.<br/><span class="accent">SOFT</span><br/><span class="accent2">&amp; IA</span></div>
-          <div class="skills-wrap">
-            <div class="skill-tag"><span class="dot"></span>Java</div>
-            <div class="skill-tag"><span class="dot"></span>Greenfoot</div>
-            <div class="skill-tag"><span class="dot"></span>OOP</div>
-            <div class="skill-tag"><span class="dot"></span>IA Básica</div>
-            <div class="skill-tag"><span class="dot"></span>HTML</div>
-            <div class="skill-tag"><span class="dot"></span>CSS</div>
-            <div class="skill-tag"><span class="dot"></span>Algoritmos</div>
-            <div class="skill-tag"><span class="dot"></span>Game Dev</div>
-          </div>
+  <!-- PAGE 1 — SOBRE -->
+  <div class="page" id="page1">
+    <div class="page-inner">
+      <div class="section-label">// 01 SOBRE MÍ</div>
+      <div class="sobre-grid">
+        <div class="sobre-text">
+          <h2>Ing. de<br/><span class="hl">Software</span> &amp;<br/><span class="hl2">IA</span></h2>
         </div>
         <div class="sobre-right">
-          <p class="bio-text">Soy <strong>Vicente Silvestre Jop</strong>, estudiante de <strong>Ingeniería de Software con Inteligencia Artificial</strong> en <strong>SENATI</strong>. Me apasiona crear videojuegos 2D donde la inteligencia artificial da vida a los personajes.</p>
-          <p class="bio-text">Combino <strong>Ingeniería de Software</strong> e <strong>IA</strong> para desarrollar juegos donde los enemigos aprenden, se adaptan y reaccionan al jugador dinámicamente. Mi lenguaje principal es <strong>Java</strong> con el entorno <strong>Greenfoot</strong>.</p>
-          <p class="bio-text">En SENATI estudio materias como <strong>Algoritmos</strong>, <strong>Estructuras de datos</strong>, <strong>Machine Learning básico</strong> y <strong>Programación orientada a objetos</strong>.</p>
-          <div class="stats-row">
-            <div class="stat-box"><div class="stat-num">1</div><div class="stat-lbl">PROYECTO<br/>PRINCIPAL</div></div>
-            <div class="divider-v"></div>
-            <div class="stat-box"><div class="stat-num">2+</div><div class="stat-lbl">LENGUAJES<br/>DOMINADOS</div></div>
-            <div class="divider-v"></div>
-            <div class="stat-box"><div class="stat-num">∞</div><div class="stat-lbl">PASIÓN POR<br/>LA IA</div></div>
+          <p>Soy <strong>Ronaldo Aliaga Vicente</strong>, estudiante de <strong>Ingeniería de Software con Inteligencia Artificial</strong> en <strong>SENATI</strong>. Me apasiona crear videojuegos 2D usando Java y Greenfoot, aplicando principios de IA para construir enemigos inteligentes y experiencias jugables únicas.</p>
+          <p>La combinación de <strong>Ingeniería de Software</strong> e <strong>IA</strong> me permite desarrollar juegos donde los personajes aprenden, se adaptan y reaccionan al jugador de forma dinámica.</p>
+          <div class="tech-list">
+            <div class="tech-item"><span class="tech-dot"></span>Java</div>
+            <div class="tech-item"><span class="tech-dot"></span>Greenfoot</div>
+            <div class="tech-item"><span class="tech-dot"></span>OOP</div>
+            <div class="tech-item"><span class="tech-dot"></span>IA Básica</div>
+            <div class="tech-item"><span class="tech-dot"></span>HTML</div>
+            <div class="tech-item"><span class="tech-dot"></span>CSS</div>
+            <div class="tech-item"><span class="tech-dot"></span>Algoritmos</div>
+            <div class="tech-item"><span class="tech-dot"></span>Game Dev</div>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- SLIDE 2 — PROYECTOS -->
-    <div class="slide" data-num="02" id="slide2">
-      <div class="proj-layout">
-        <div class="proj-header">
-          <div class="s-label">PROYECTOS</div>
-          <span style="font-family:var(--mono);font-size:0.62rem;color:var(--dim)">01 / 01</span>
+  <!-- PAGE 2 — PROYECTOS -->
+  <div class="page" id="page2">
+    <div class="page-inner">
+      <div class="section-label">// 02 PROYECTOS</div>
+      <div class="proj-panel">
+        <div class="pp-head">
+          <div class="pp-title">🚀 Nave Espacial — Greenfoot + IA</div>
+          <span class="pp-status">&#9679; Completado</span>
         </div>
-        <div class="proj-card">
-          <div class="pc-left">
-            <div class="pc-eyebrow">PROYECTO PRINCIPAL</div>
-            <div class="pc-title">NAVE<br/><span>ESPACIAL</span></div>
-            <p class="pc-desc">Juego de disparos espaciales en <strong>Greenfoot</strong> con <strong>IA aplicada</strong>. Pilotas una nave mientras los enemigos se mueven en patrones inteligentes, esquivan disparos y escalan en dificultad. Incluye pathfinding básico, sistema de colisiones y puntuación en tiempo real.</p>
-            <div class="pc-tags">
-              <span>Greenfoot</span><span>Java</span><span>IA</span>
-              <span>2D Shooter</span><span>OOP</span><span>Pathfinding</span>
-            </div>
-            <div class="pc-btns">
-              <button class="pcb-main" onclick="goTo(3)">▶ VER DEMO</button>
-              <button class="pcb-sec">{ } CÓDIGO</button>
-            </div>
+        <div class="pp-body">
+          <p class="pp-desc">
+            Juego de disparos espaciales en <strong style="color:#38bdf8">Greenfoot</strong> con
+            <strong style="color:#818cf8">IA</strong> aplicada. Pilotas una nave espacial en un universo
+            donde los enemigos tienen comportamiento inteligente, se mueven en patrones y aumentan
+            su dificultad. Incluye disparos, colisiones, pathfinding y puntuación en tiempo real.
+          </p>
+          <div class="pp-tags">
+            <span>Greenfoot</span>
+            <span>Java</span>
+            <span>IA</span>
+            <span>Shooter</span>
+            <span>OOP</span>
+            <span>2D</span>
+            <span>Pathfinding</span>
           </div>
-          <div class="pc-right">
-            <div class="pc-info-row"><span class="pir-k">LENGUAJE</span><span class="pir-v g">Java</span></div>
-            <div class="pc-info-row"><span class="pir-k">FRAMEWORK</span><span class="pir-v b">Greenfoot</span></div>
-            <div class="pc-info-row"><span class="pir-k">TIPO</span><span class="pir-v">2D Shooter</span></div>
-            <div class="pc-info-row"><span class="pir-k">IA APLICADA</span><span class="pir-v g">✓ SÍ</span></div>
-            <div class="pc-info-row"><span class="pir-k">PATHFINDING</span><span class="pir-v g">✓ SÍ</span></div>
-            <div class="pc-info-row"><span class="pir-k">DIFICULTAD ADAPTATIVA</span><span class="pir-v g">✓ SÍ</span></div>
-            <div class="pc-info-row"><span class="pir-k">ESTADO</span><span class="pir-v b">COMPLETADO</span></div>
-            <div class="pc-info-row"><span class="pir-k">AÑO</span><span class="pir-v o">2026</span></div>
+          <div class="pp-btns">
+            <button class="ppb-main" onclick="goTo(3)">&#9654; Ver video</button>
+            <button class="ppb-sec">{ } Código</button>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- SLIDE 3 — MEDIA -->
-    <div class="slide" data-num="03" id="slide3">
-      <div class="media-layout">
-        <div class="media-header">
-          <div class="s-label">MEDIA — VIDEO &amp; IMÁGENES</div>
+  <!-- PAGE 3 — VIDEO -->
+  <div class="page" id="page3">
+    <div class="page-inner">
+      <div class="section-label">// 03 VIDEO DEL PROYECTO</div>
+      <div class="demo-wrap">
+        <div class="demo-header">
+          <div class="demo-dots">
+            <span class="dd red"></span>
+            <span class="dd yellow"></span>
+            <span class="dd green"></span>
+          </div>
+          <span class="demo-filename">mi video.mp4</span>
         </div>
-        <div class="media-grid">
-
-          <!-- VIDEO: referencia directa al archivo local -->
-          <div class="video-box">
-            <div class="vbox-bar">
-              <div class="vb-dots">
-                <span class="vbd r"></span><span class="vbd y"></span><span class="vbd g"></span>
-              </div>
-              <span class="vbox-label">~/nave-espacial/ <span>mi-video.mp4</span></span>
-            </div>
-            <video id="miVideo" controls style="width:100%;display:block;background:#000;max-height:280px;">
-              <source src="mi-video.mp4" type="video/mp4"/>
-              Tu navegador no soporta video HTML5.
-            </video>
-            <div class="vbox-footer">
-              <span style="font-family:var(--mono);font-size:0.6rem;color:var(--dim)">MP4 · MOV · AVI</span>
-            </div>
-          </div>
-
-          <!-- IMÁGENES: tarea1000.png cargada por defecto -->
-          <div class="images-box">
-            <div class="ibox-bar">
-              <div class="vb-dots">
-                <span class="vbd r"></span><span class="vbd y"></span><span class="vbd g"></span>
-              </div>
-              <span class="ibox-label">~/galeria/ <span id="galLabel">1 imagen</span></span>
-            </div>
-            <div class="gallery-area" id="galleryArea">
-              <!-- Imagen local por defecto -->
-              <div class="gallery-thumb" onclick="openLightbox('tarea1000.png')">
-                <img src="tarea1000.png" alt="tarea1000"/>
-              </div>
-            </div>
-            <div class="ibox-footer">
-              <label class="upload-btn" for="fImgInput">
-                ↑ AGREGAR IMÁGENES
-                <input type="file" id="fImgInput" accept="image/*" multiple onchange="loadImages(event)"/>
-              </label>
-              <span id="img-count" style="font-family:var(--mono);font-size:0.6rem;color:var(--dim);margin-left:auto">1 / ∞</span>
-            </div>
-          </div>
-
+        <div class="video-area">
+          <video id="miVideo" controls>
+            <source src="mi video.mp4" type="video/mp4"/>
+          </video>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- SLIDE 4 — CONTACTO -->
-    <div class="slide" data-num="04" id="slide4">
-      <div class="contact-layout">
-        <div class="s-label">CONTACTO</div>
-        <div class="contact-big">
-          <div>HABLEMOS</div>
-          <div class="line2">CONMIGO</div>
-          <div class="line3">AHORA.</div>
-        </div>
-        <div class="contact-cards">
-          <a class="cc" href="https://github.com/vicentesilvestre" target="_blank">
-            <span class="cc-icon">⌨️</span>
-            <div class="cc-info"><div class="cc-name">GitHub</div><div class="cc-handle">github.com/vicentesilvestre</div></div>
-            <span class="cc-arrow">↗</span>
-          </a>
-          <a class="cc" href="https://linkedin.com/in/vicentesilvestre" target="_blank">
-            <span class="cc-icon">💼</span>
-            <div class="cc-info"><div class="cc-name">LinkedIn</div><div class="cc-handle">linkedin.com/in/vicentesilvestre</div></div>
-            <span class="cc-arrow">↗</span>
-          </a>
-          <a class="cc" href="mailto:vicente.silvestre@gmail.com">
-            <span class="cc-icon">✉️</span>
-            <div class="cc-info"><div class="cc-name">Email</div><div class="cc-handle">vicente.silvestre@gmail.com</div></div>
-            <span class="cc-arrow">↗</span>
-          </a>
-          <a class="cc" href="https://twitter.com/vicentesjop" target="_blank">
-            <span class="cc-icon">🐦</span>
-            <div class="cc-info"><div class="cc-name">Twitter / X</div><div class="cc-handle">@vicentesjop</div></div>
-            <span class="cc-arrow">↗</span>
-          </a>
-          <a class="cc" href="https://discord.com/users/vicentesjop" target="_blank">
-            <span class="cc-icon">🎮</span>
-            <div class="cc-info"><div class="cc-name">Discord</div><div class="cc-handle">vicentesjop#0000</div></div>
-            <span class="cc-arrow">↗</span>
-          </a>
-          <a class="cc" href="https://youtube.com/@vicentesjop" target="_blank">
-            <span class="cc-icon">▶️</span>
-            <div class="cc-info"><div class="cc-name">YouTube</div><div class="cc-handle">@vicentesjop</div></div>
-            <span class="cc-arrow">↗</span>
-          </a>
-        </div>
-        <div class="contact-footer">
-          DISEÑADO Y CONSTRUIDO POR <span>VICENTE SILVESTRE JOP</span> — 2026
-        </div>
+  <!-- PAGE 4 — CONTACTO -->
+  <div class="page" id="page4">
+    <div class="page-inner">
+      <div class="section-label">// 04 CONTACTO</div>
+      <div class="contact-grid">
+        <a class="contact-card" href="https://github.com/ronaldo" target="_blank">
+          <div class="contact-icon ic-gh">⌨️</div>
+          <div class="contact-info">
+            <span class="contact-name">GitHub</span>
+            <span class="contact-handle">github.com/ronaldo</span>
+          </div>
+          <span class="contact-arrow">→</span>
+        </a>
+        <a class="contact-card" href="https://linkedin.com/in/ronaldo" target="_blank">
+          <div class="contact-icon ic-li">💼</div>
+          <div class="contact-info">
+            <span class="contact-name">LinkedIn</span>
+            <span class="contact-handle">linkedin.com/in/ronaldo</span>
+          </div>
+          <span class="contact-arrow">→</span>
+        </a>
+        <a class="contact-card" href="https://twitter.com/ronaldo" target="_blank">
+          <div class="contact-icon ic-tw">🐦</div>
+          <div class="contact-info">
+            <span class="contact-name">Twitter / X</span>
+            <span class="contact-handle">@ronaldo</span>
+          </div>
+          <span class="contact-arrow">→</span>
+        </a>
+        <a class="contact-card" href="mailto:ronaldo@gmail.com">
+          <div class="contact-icon ic-em">✉️</div>
+          <div class="contact-info">
+            <span class="contact-name">Email</span>
+            <span class="contact-handle">ronaldo@gmail.com</span>
+          </div>
+          <span class="contact-arrow">→</span>
+        </a>
+        <a class="contact-card" href="https://discord.com/users/ronaldo" target="_blank">
+          <div class="contact-icon ic-dc">🎮</div>
+          <div class="contact-info">
+            <span class="contact-name">Discord</span>
+            <span class="contact-handle">ronaldo#0000</span>
+          </div>
+          <span class="contact-arrow">→</span>
+        </a>
+        <a class="contact-card" href="https://youtube.com/@ronaldo" target="_blank">
+          <div class="contact-icon ic-yt">▶️</div>
+          <div class="contact-info">
+            <span class="contact-name">YouTube</span>
+            <span class="contact-handle">@ronaldo</span>
+          </div>
+          <span class="contact-arrow">→</span>
+        </a>
       </div>
+      <div class="page-footer">Creado por <span class="fc-hl">Ronaldo Aliaga Vicente</span> &mdash; 2026</div>
     </div>
-
-  </div><!-- /scroll-track -->
+  </div>
 
   <script>
-    /* ===== CURSOR ===== */
-    var cur  = document.getElementById('cursor');
-    var ring = document.getElementById('cursor-ring');
-    document.addEventListener('mousemove', function(e) {
-      cur.style.left  = e.clientX + 'px';
-      cur.style.top   = e.clientY + 'px';
-      ring.style.left = e.clientX + 'px';
-      ring.style.top  = e.clientY + 'px';
-    });
+    const c = document.getElementById('stars');
+    const ctx = c.getContext('2d');
+    c.width = window.innerWidth;
+    c.height = window.innerHeight;
+    const stars = Array.from({length:100}, () => ({
+      x: Math.random()*c.width, y: Math.random()*c.height,
+      r: Math.random()*1.1, a: Math.random()*Math.PI*2
+    }));
+    function drawStars() {
+      ctx.clearRect(0,0,c.width,c.height);
+      stars.forEach(s => {
+        s.a += 0.004;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+        ctx.fillStyle = `rgba(100,180,255,${0.3+0.3*Math.sin(s.a)})`;
+        ctx.fill();
+      });
+      requestAnimationFrame(drawStars);
+    }
+    drawStars();
+    window.addEventListener('resize', () => { c.width=window.innerWidth; c.height=window.innerHeight; });
 
-    /* ===== NAVEGACIÓN ===== */
-    var current = 0;
-    var total   = 5;
-    var track   = document.getElementById('track');
+    let current = 0;
+    const total = 5;
 
     function goTo(n) {
-      current = Math.max(0, Math.min(n, total - 1));
-      track.style.transform = 'translateX(' + (-current * 100) + 'vw)';
-      document.querySelectorAll('.tnav').forEach(function(el, i) {
-        el.classList.toggle('on', i === current);
-      });
-      document.querySelectorAll('.sd').forEach(function(el, i) {
-        el.classList.toggle('on', i === current);
-      });
-      document.getElementById('progFill').style.width = (current / (total - 1) * 100) + '%';
+      document.getElementById('page'+current).classList.remove('active');
+      document.querySelectorAll('.pdot')[current].classList.remove('active');
+      document.getElementById('nav'+current).classList.remove('active');
+      current = n;
+      document.getElementById('page'+current).classList.add('active');
+      document.querySelectorAll('.pdot')[current].classList.add('active');
+      document.getElementById('nav'+current).classList.add('active');
     }
 
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') goTo(current + 1);
-      if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   goTo(current - 1);
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') goTo(Math.min(current+1, total-1));
+      if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   goTo(Math.max(current-1, 0));
     });
 
-    var wheelLock = false;
-    document.addEventListener('wheel', function(e) {
-      if (wheelLock) return;
-      wheelLock = true;
-      if (e.deltaY > 0 || e.deltaX > 0) goTo(current + 1);
-      else goTo(current - 1);
-      setTimeout(function() { wheelLock = false; }, 750);
-    }, { passive: true });
-
-    var touchStartX = 0;
-    document.addEventListener('touchstart', function(e) { touchStartX = e.touches[0].clientX; });
-    document.addEventListener('touchend', function(e) {
-      var diff = touchStartX - e.changedTouches[0].clientX;
-      if (diff >  50) goTo(current + 1);
-      if (diff < -50) goTo(current - 1);
+    let tx = 0;
+    document.addEventListener('touchstart', e => tx = e.touches[0].clientX);
+    document.addEventListener('touchend', e => {
+      const diff = tx - e.changedTouches[0].clientX;
+      if (diff > 50) goTo(Math.min(current+1, total-1));
+      if (diff < -50) goTo(Math.max(current-1, 0));
     });
 
     goTo(0);
-
-    /* ===== CONTAR IMÁGENES INICIALES ===== */
-    var imgCount = document.querySelectorAll('#galleryArea .gallery-thumb').length;
-
-    /* ===== CAMBIAR VIDEO ===== */
-    function loadVideo(e) {
-      var f = e.target.files[0];
-      if (!f) return;
-      var video = document.getElementById('miVideo');
-      video.src = URL.createObjectURL(f);
-      document.querySelector('#miVideo + .vbox-footer .vbox-label span, .vbox-label span') && null;
-      video.load();
-    }
-
-    /* ===== AGREGAR IMÁGENES ===== */
-    function loadImages(e) {
-      var files = Array.from(e.target.files);
-      if (!files.length) return;
-
-      var area = document.getElementById('galleryArea');
-
-      files.forEach(function(f) {
-        if (!f.type.startsWith('image/')) return;
-        var url = URL.createObjectURL(f);
-
-        var div = document.createElement('div');
-        div.className = 'gallery-thumb';
-        (function(u) { div.onclick = function() { openLightbox(u); }; })(url);
-
-        var img = document.createElement('img');
-        img.src = url;
-        img.alt = f.name;
-
-        div.appendChild(img);
-        area.appendChild(div);
-        imgCount++;
-      });
-
-      updateCount();
-      e.target.value = '';
-    }
-
-    function updateCount() {
-      var txt = imgCount === 1 ? '1 imagen' : imgCount + ' imágenes';
-      document.getElementById('galLabel').textContent = txt;
-      document.getElementById('img-count').textContent = imgCount + ' / ∞';
-    }
-
-    /* ===== LIGHTBOX ===== */
-    function openLightbox(src) {
-      document.getElementById('lb-img').src = src;
-      document.getElementById('lightbox').classList.add('open');
-    }
-    function closeLightbox() {
-      document.getElementById('lightbox').classList.remove('open');
-    }
-    document.getElementById('lightbox').addEventListener('click', function(e) {
-      if (e.target === this) closeLightbox();
-    });
   </script>
 </body>
 </html>
