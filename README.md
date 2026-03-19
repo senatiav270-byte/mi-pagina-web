@@ -26,7 +26,6 @@
     body { background: var(--bg); color: var(--text); font-family: var(--font); overflow-x: hidden; }
     #stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
 
-    /* NAV */
     .nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
@@ -44,10 +43,8 @@
       text-decoration: none; letter-spacing: 0.05em; transition: color 0.2s;
       padding-bottom: 2px; border-bottom: 1px solid transparent;
     }
-    .nav-center a:hover,
-    .nav-center a.active { color: var(--accent); border-bottom-color: var(--accent); }
+    .nav-center a:hover, .nav-center a.active { color: var(--accent); border-bottom-color: var(--accent); }
 
-    /* PAGES */
     .page {
       position: fixed; inset: 0; z-index: 1;
       overflow-y: auto;
@@ -68,42 +65,30 @@
 
     .section-label { font-family: var(--mono); font-size: 0.58rem; color: var(--accent2); letter-spacing: 0.15em; margin-bottom: 1rem; }
 
-    /* PORTADA */
     .portada-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
-
     .portada-top {
       background: linear-gradient(135deg, #0d1422, #111b2e);
-      padding: 1rem;
-      display: flex; align-items: center; gap: 0.9rem;
-      border-bottom: 1px solid var(--border);
-      position: relative; overflow: hidden;
+      padding: 1rem; display: flex; align-items: center; gap: 0.9rem;
+      border-bottom: 1px solid var(--border); position: relative; overflow: hidden;
     }
     .portada-top::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 50%, rgba(56,189,248,0.06), transparent 70%); }
-
     .portada-avatar {
       width: 52px; height: 52px; border-radius: 50%;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
       display: flex; align-items: center; justify-content: center;
       font-family: var(--mono); font-size: 1.2rem; font-weight: 700;
       color: var(--bg); flex-shrink: 0;
-      box-shadow: 0 0 16px rgba(56,189,248,0.3);
-      position: relative; z-index: 1;
+      box-shadow: 0 0 16px rgba(56,189,248,0.3); position: relative; z-index: 1;
     }
-
     .portada-id { position: relative; z-index: 1; }
     .portada-nombre {
-      font-size: clamp(0.85rem, 3.5vw, 1.2rem);
-      font-weight: 800; letter-spacing: -0.02em;
+      font-size: clamp(0.85rem, 3.5vw, 1.2rem); font-weight: 800; letter-spacing: -0.02em;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
-      -webkit-background-clip: text; background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 0.2rem;
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.2rem;
     }
     .portada-rol { font-family: var(--mono); font-size: 0.58rem; color: var(--green); letter-spacing: 0.06em; margin-bottom: 0.25rem; }
     .portada-uni { font-size: 0.65rem; color: var(--muted); display: flex; align-items: center; gap: 0.3rem; }
-
     .portada-body { padding: 0.8rem; display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
-
     .info-block { background: var(--surface2); border: 1px solid var(--border); border-radius: 9px; padding: 0.7rem 0.8rem; }
     .info-block-title { font-family: var(--mono); font-size: 0.54rem; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem; }
     .info-block p { font-size: 0.7rem; color: #94a3b8; line-height: 1.55; }
@@ -113,11 +98,9 @@
     .info-chip.green { background: rgba(52,211,153,0.07); border-color: rgba(52,211,153,0.2); color: var(--green); }
     .info-chip.purple { background: rgba(129,140,248,0.07); border-color: rgba(129,140,248,0.2); color: var(--accent2); }
 
-    /* SOBRE */
     .sobre-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 1.5rem; align-items: start; }
     .sobre-text h2 { font-size: clamp(1.4rem, 4vw, 2.5rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.03em; }
-    .hl { color: var(--accent); }
-    .hl2 { color: var(--accent2); }
+    .hl { color: var(--accent); } .hl2 { color: var(--accent2); }
     .sobre-right p { font-size: 0.78rem; color: #94a3b8; line-height: 1.7; margin-bottom: 1rem; }
     .sobre-right strong { color: var(--accent); font-weight: 600; }
     .tech-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0.35rem; }
@@ -125,19 +108,14 @@
     .tech-item:hover { color: var(--accent); border-color: rgba(56,189,248,0.3); }
     .tech-dot { width: 5px; height: 5px; background: var(--accent); border-radius: 50%; flex-shrink: 0; }
 
-    /* VIDEO */
     .demo-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
     .demo-header { display: flex; align-items: center; gap: 0.5rem; padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--border); background: var(--surface2); }
     .demo-dots { display: flex; gap: 4px; }
     .dd { width: 9px; height: 9px; border-radius: 50%; }
-    .dd.red { background: #ff5f57; }
-    .dd.yellow { background: #ffbd2e; }
-    .dd.green { background: #28c840; }
+    .dd.red { background: #ff5f57; } .dd.yellow { background: #ffbd2e; } .dd.green { background: #28c840; }
     .demo-filename { font-family: var(--mono); font-size: 0.6rem; color: var(--muted); }
     .video-area { background: #000; }
-    #miVideo { width: 100%; max-height: 340px; display: block; }
 
-    /* PROYECTO */
     .proj-panel { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: border-color 0.3s, transform 0.3s; }
     .proj-panel:hover { border-color: rgba(56,189,248,0.35); transform: translateY(-3px); }
     .pp-head { padding: 0.85rem 1rem; background: var(--surface2); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
@@ -153,17 +131,13 @@
     .ppb-sec { background: transparent; color: var(--muted); border: 1px solid var(--border); padding: 0.5rem 0.8rem; border-radius: 7px; font-family: var(--mono); font-size: 0.62rem; cursor: pointer; transition: all 0.2s; }
     .ppb-sec:hover { color: var(--text); border-color: #334155; }
 
-    /* CONTACTO */
     .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
     .contact-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 0.8rem 0.9rem; display: flex; align-items: center; gap: 0.6rem; text-decoration: none; transition: all 0.25s; }
     .contact-card:hover { transform: translateY(-2px); border-color: rgba(56,189,248,0.4); box-shadow: 0 5px 16px rgba(0,0,0,0.3); }
     .contact-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.95rem; flex-shrink: 0; }
-    .ic-gh { background: rgba(255,255,255,0.06); }
-    .ic-li { background: rgba(10,102,194,0.15); }
-    .ic-tw { background: rgba(29,161,242,0.12); }
-    .ic-em { background: rgba(56,189,248,0.1); }
-    .ic-dc { background: rgba(88,101,242,0.15); }
-    .ic-yt { background: rgba(255,0,0,0.1); }
+    .ic-gh { background: rgba(255,255,255,0.06); } .ic-li { background: rgba(10,102,194,0.15); }
+    .ic-tw { background: rgba(29,161,242,0.12); } .ic-em { background: rgba(56,189,248,0.1); }
+    .ic-dc { background: rgba(88,101,242,0.15); } .ic-yt { background: rgba(255,0,0,0.1); }
     .contact-info { display: flex; flex-direction: column; gap: 0.1rem; overflow: hidden; }
     .contact-name { font-weight: 600; font-size: 0.75rem; color: var(--text); }
     .contact-handle { font-family: var(--mono); font-size: 0.58rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -308,13 +282,8 @@
             su dificultad. Incluye disparos, colisiones, pathfinding y puntuación en tiempo real.
           </p>
           <div class="pp-tags">
-            <span>Greenfoot</span>
-            <span>Java</span>
-            <span>IA</span>
-            <span>Shooter</span>
-            <span>OOP</span>
-            <span>2D</span>
-            <span>Pathfinding</span>
+            <span>Greenfoot</span><span>Java</span><span>IA</span>
+            <span>Shooter</span><span>OOP</span><span>2D</span><span>Pathfinding</span>
           </div>
           <div class="pp-btns">
             <button class="ppb-main" onclick="goTo(3)">&#9654; Ver video</button>
@@ -339,7 +308,7 @@
           <span class="demo-filename">mi video.mp4</span>
         </div>
         <div class="video-area">
-          <video id="miVideo" controls>
+          <video controls style="width:100%;max-height:340px;display:block;">
             <source src="mi video.mp4" type="video/mp4"/>
           </video>
         </div>
@@ -354,50 +323,32 @@
       <div class="contact-grid">
         <a class="contact-card" href="https://github.com/ronaldo" target="_blank">
           <div class="contact-icon ic-gh">⌨️</div>
-          <div class="contact-info">
-            <span class="contact-name">GitHub</span>
-            <span class="contact-handle">github.com/ronaldo</span>
-          </div>
+          <div class="contact-info"><span class="contact-name">GitHub</span><span class="contact-handle">github.com/ronaldo</span></div>
           <span class="contact-arrow">→</span>
         </a>
         <a class="contact-card" href="https://linkedin.com/in/ronaldo" target="_blank">
           <div class="contact-icon ic-li">💼</div>
-          <div class="contact-info">
-            <span class="contact-name">LinkedIn</span>
-            <span class="contact-handle">linkedin.com/in/ronaldo</span>
-          </div>
+          <div class="contact-info"><span class="contact-name">LinkedIn</span><span class="contact-handle">linkedin.com/in/ronaldo</span></div>
           <span class="contact-arrow">→</span>
         </a>
         <a class="contact-card" href="https://twitter.com/ronaldo" target="_blank">
           <div class="contact-icon ic-tw">🐦</div>
-          <div class="contact-info">
-            <span class="contact-name">Twitter / X</span>
-            <span class="contact-handle">@ronaldo</span>
-          </div>
+          <div class="contact-info"><span class="contact-name">Twitter / X</span><span class="contact-handle">@ronaldo</span></div>
           <span class="contact-arrow">→</span>
         </a>
         <a class="contact-card" href="mailto:ronaldo@gmail.com">
           <div class="contact-icon ic-em">✉️</div>
-          <div class="contact-info">
-            <span class="contact-name">Email</span>
-            <span class="contact-handle">ronaldo@gmail.com</span>
-          </div>
+          <div class="contact-info"><span class="contact-name">Email</span><span class="contact-handle">ronaldo@gmail.com</span></div>
           <span class="contact-arrow">→</span>
         </a>
         <a class="contact-card" href="https://discord.com/users/ronaldo" target="_blank">
           <div class="contact-icon ic-dc">🎮</div>
-          <div class="contact-info">
-            <span class="contact-name">Discord</span>
-            <span class="contact-handle">ronaldo#0000</span>
-          </div>
+          <div class="contact-info"><span class="contact-name">Discord</span><span class="contact-handle">ronaldo#0000</span></div>
           <span class="contact-arrow">→</span>
         </a>
         <a class="contact-card" href="https://youtube.com/@ronaldo" target="_blank">
           <div class="contact-icon ic-yt">▶️</div>
-          <div class="contact-info">
-            <span class="contact-name">YouTube</span>
-            <span class="contact-handle">@ronaldo</span>
-          </div>
+          <div class="contact-info"><span class="contact-name">YouTube</span><span class="contact-handle">@ronaldo</span></div>
           <span class="contact-arrow">→</span>
         </a>
       </div>
@@ -408,8 +359,7 @@
   <script>
     const c = document.getElementById('stars');
     const ctx = c.getContext('2d');
-    c.width = window.innerWidth;
-    c.height = window.innerHeight;
+    c.width = window.innerWidth; c.height = window.innerHeight;
     const stars = Array.from({length:100}, () => ({
       x: Math.random()*c.width, y: Math.random()*c.height,
       r: Math.random()*1.1, a: Math.random()*Math.PI*2
@@ -418,10 +368,8 @@
       ctx.clearRect(0,0,c.width,c.height);
       stars.forEach(s => {
         s.a += 0.004;
-        ctx.beginPath();
-        ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
-        ctx.fillStyle = `rgba(100,180,255,${0.3+0.3*Math.sin(s.a)})`;
-        ctx.fill();
+        ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+        ctx.fillStyle = `rgba(100,180,255,${0.3+0.3*Math.sin(s.a)})`; ctx.fill();
       });
       requestAnimationFrame(drawStars);
     }
